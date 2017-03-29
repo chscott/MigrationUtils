@@ -1,0 +1,94 @@
+[Migrating]
+1 1 1 1
+[EmailFrom]
+GAPPSA
+$Var1
+
+
+
+0
+[EmailTo]
+NOTES
+$Var2
+$Var3
+$NOTESADMINPWD;$NOTESADMINID
+
+1
+[ABFrom]
+GAPPSA
+$Var1
+
+
+
+0
+[ABTo]
+NOTES
+$Var2
+$Var3
+$NOTESADMINPWD;$NOTESADMINID
+
+0
+[CalFrom]
+GAPPSA
+$Var1
+
+
+
+0
+[CalTo]
+NOTES
+$Var2
+$Var3
+$NOTESADMINPWD;$NOTESADMINID
+
+0
+[TaskFrom]
+GAPPSA
+$Var1
+
+
+
+0
+[TaskTo]
+NOTES
+$Var2
+$Var3
+$NOTESADMINPWD;$NOTESADMINID
+
+0
+[FolderConvert]
+[ContactConvert]
+[CalendarConvert]
+[TaskConvert]
+[FolderExclude]
+[FolderMap]
+[TranslationTable]
+[BatchData]
+[SwitchData]
+/ATTACHDIR $TMDATADIR\Attachments
+/D56 BSDNRFUH
+/DEDUP $TMDATADIR\Dedup\$Var1.dat
+/D165
+/D127
+/SKIPSUBS $TMDATADIR\Exclude\skipsubs.txt
+/D $TMDATADIR\Temp
+/MAXATTACHSIZE 51200
+/DETACH $TMDATADIR\Detach\$Var1
+/D212
+/LD $TMDATADIR\Logs
+/LTEXT
+/LFILES
+/LSUB
+/LTS
+/DEBUG
+/NOXMLREPORT
+/D270
+/USEADDR
+/D113
+/D225
+/D196 500
+/LASTFIRST
+/XOAUTHSA $SERVICEACCOUNT|$KEYFILE
+/IBM2 
+[ScheduleData]
+-1.00000,-1.00000,-1.00000,-1.00000

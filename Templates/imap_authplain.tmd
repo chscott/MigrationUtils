@@ -1,0 +1,95 @@
+[Migrating]
+1 0 0 0
+[EmailFrom]
+IMAP8
+$LEGACYSERVER
+$Var1
+
+
+0
+[EmailTo]
+NOTES
+$Var2
+$Var3
+$NOTESADMINPWD;$NOTESADMINID
+
+1
+[ABFrom]
+UNSELECTED
+
+
+
+
+0
+[ABTo]
+UNSELECTED
+
+
+
+
+0
+[CalFrom]
+UNSELECTED
+
+
+
+
+0
+[CalTo]
+UNSELECTED
+
+
+
+
+0
+[TaskFrom]
+UNSELECTED
+
+
+
+
+0
+[TaskTo]
+UNSELECTED
+
+
+
+
+0
+[FolderConvert]
+[ContactConvert]
+[CalendarConvert]
+[TaskConvert]
+[FolderExclude]
+[FolderMap]
+[TranslationTable]
+[BatchData]
+[SwitchData]
+/ATTACHDIR $TMDATADIR\Attachments
+/D56 BSDNRFUH
+/DEDUP $TMDATADIR\Dedup\$Var1.dat
+/D165
+/D127
+/SKIPSUBS $TMDATADIR\Exclude\skipsubs.txt
+/D $TMDATADIR\Temp
+/MAXATTACHSIZE 51200
+/DETACH $TMDATADIR\Detach\$Var1
+/D212
+/LD $TMDATADIR\Logs
+/LTEXT
+/LFILES
+/LSUB
+/LTS
+/DEBUG
+/NOXMLREPORT
+/D270
+/USEADDR
+/D113
+/D225
+/D196 500
+/LASTFIRST
+/AUTHPLAIN $LEGACYADMINID|$LEGACYADMINPWD
+/D197 10
+/IBM2 
+[ScheduleData]
+-1.00000,-1.00000,-1.00000,-1.00000
