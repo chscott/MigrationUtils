@@ -1,13 +1,12 @@
-===============================================================================================================================
-Overview
+## Overview
 
 MigrationUtils is a set of utilities that help automate manual portions of a mail migration using Transend Migrator. It
 contains code to perform some or all of the following tasks, depending on the source mail system:
 
-- User registration in an on-prem Domino server
-- Generation of batch migration tables
-- Generation of address translation tables
-- Generation of custom Transend Migrator configuration files (TMDs)
+  - User registration in an on-prem Domino server
+  - Generation of batch migration tables
+  - Generation of address translation tables
+  - Generation of custom Transend Migrator configuration files (TMDs)
 
 In general, a migration project using MigrationUtils is comprised of these steps:
 
@@ -32,58 +31,54 @@ In general, a migration project using MigrationUtils is comprised of these steps
    runtime options to move data from the legacy system to Domino, storing the data in the user's mail file (NSF) on the on-prem
    Domino server. In addition to the batch migration and address translation tables discussed previously, MigrationUtils builds
    a custom Transend Migrator configuration file (TMD) with all of the information needed to connect to the source and target
-   environments plus a set of best practice options.
+   environments plus a set of best-practice options.
 
 5. Once users have been migrated from the legacy system to the on-prem Domino server, IBM onboarding tools like Mail Onboarding
    Manager (MOM) are used to migrate the users to SmartCloud Notes/Verse.
 
 The sections that follow will describe in detail how to perform Steps 1-4 above.
-===============================================================================================================================
 
-===============================================================================================================================
-Supported platforms
+## Supported platforms
 
 MigrationUtils supports the following user repositories for registration:
 
-- Active Directory (via LDAP)
-- Google Directory (via CSV export)
-- Zimbra (via LDAP)
+  - Active Directory (via LDAP)
+  - Google Directory (via CSV export)
+  - Zimbra (via LDAP)
 
 MigrationUtils supports the following systems for data migration:
-- Exchange (EWS and MAPI)
-- PST files
-- Google Apps
-- IMAP (mail only)
-- Zimbra
-===============================================================================================================================
 
-===============================================================================================================================
-Prerequisites
+  - Exchange (EWS and MAPI)
+  - PST files
+  - Google Apps
+  - IMAP (mail only)
+  - Zimbra
+
+## Prerequisites
 
 Perform the following on the system on which you will be performing the migration (i.e. the migration workstation):
 
 1. Install a Notes client (with Domino Administrator and Domino Designer) at version level 9.0.1 FP8. Note that this exact
    level is required.
 
-2. Download and install the latest version of Transend Migrator from http://www.transend.com/ftp/tm.msi. Important! You must
+2. Download and install the latest version of Transend Migrator from <http://www.transend.com/ftp/tm.msi>. Important! You must
    install Version 12.6 Build 1288 or later.
 
-3. Copy the on-prem Domino certifier ID to the migration workstation. For example, copy it to C:\IBM\IDs\cert.id.
+3. Copy the on-prem Domino certifier ID to the migration workstation. For example, copy it to C:\IBM\IDs.
 
-4. Update PowerShell to version 5 or later. You can get the current version of PowerShell by running the following command in
-   PowerShell:
+4. Update PowerShell to version 5 or later. You can get the current version of PowerShell by running the following command:
 
+   ```PowerShell
    $PSVersionTable.PSVersion.Major
+   ```
 
-   If this returns a number less than 5, see https://www.microsoft.com/en-us/download/details.aspx?id=50395 for details on 
+   If this returns a number less than 5, see <https://www.microsoft.com/en-us/download/details.aspx?id=50395> for details on 
    downloading a Windows update to upgrade the version.
 	
 5. If you are migrating from Exchange MAPI or PST files, install Outlook on the migration workstation and configure it as the
    default application for email.
-===============================================================================================================================
 
-===============================================================================================================================
-Step 1 - Setup
+## Step 1 - Setup
 
 1. Copy setupTM.zip to the migration workstation's C:\Temp directory.
 
@@ -123,10 +118,8 @@ Step 1 - Setup
     after filling out all fields.
 
 You have now completed setup.
-===============================================================================================================================
 
-===============================================================================================================================
-Step 2a - Registering Users from Active Directory
+## Step 2a - Registering Users from Active Directory
 
 Only perform this step if legacy user accounts are stored in Active Directory and you want to use MigrationUtils to register
 those users in Domino. Skip this step if user accounts are stored in a different directory or you will register users in Domino
@@ -139,17 +132,19 @@ outside of MigrationUtils.
 3. Run .\getADUsers with the options for your environment and direct the output to a file named registration.ldif. For 
    example:
 
+   ```PowerShell
    .\getADUsers "C:\IBM\Notes" "ldap.ibm.com" "cn=Administrator,cn=Users,dc=ibm,dc=com" "password" 
    "ou=Sales,dc=ibm,dc=com" "(&(cn=*)(objectClass=organizationalPerson))" > c:\ProgramData\Transend\Extras\registration.ldif
+   ```
 
    The following are true in the example above:
 
-   - The Notes client is installed in C:\IBM\Notes
-   - The Active Directory server is ldap.ibm.com
-   - The Active Directory administrator is cn=Administrator,cn=Users,dc=ibm,dc=com
-   - The Active Directory administrator password is password
-   - The search for users will begin at ou=Sales,dc=ibm,dc=com
-   - The search will be for all users in ou=Sales,dc=ibm,dc=com
+  - The Notes client is installed in C:\IBM\Notes
+  - The Active Directory server is ldap.ibm.com
+  - The Active Directory administrator is cn=Administrator,cn=Users,dc=ibm,dc=com
+  - The Active Directory administrator password is password
+  - The search for users will begin at ou=Sales,dc=ibm,dc=com
+  - The search will be for all users in ou=Sales,dc=ibm,dc=com
 
 4. From migration.nsf, run the Register Active Directory Users agent and select the registration.ldif file when prompted.
    Important! Make sure the users you are registering are not already registered in Domino. The agent will fail if a user 
@@ -164,12 +159,10 @@ outside of MigrationUtils.
    template. Doing that means you don't need to perform this step each time you register new users.
 	
 Note: If you are changing the email addresses for users during migration, leave the old email address in the Person document
-      at this time. The old email address is needed to build the migration artifacts in later steps. You can change the email
-      address in the Person document after all parts of the Transend Migrator migration have been completed.
-===============================================================================================================================
+at this time. The old email address is needed to build the migration artifacts in later steps. You can change the email
+address in the Person document after all parts of the Transend Migrator migration have been completed.
 
-===============================================================================================================================
-Step 2b - Registering Users from Google Directory
+## Step 2b - Registering Users from Google Directory
 
 Only perform this step if legacy user accounts are stored in Google Directory and you want to use MigrationUtils to register
 those users in Domino. Skip this step if user accounts are stored in a different directory or you will register users in Domino
@@ -192,12 +185,10 @@ outside of MigrationUtils.
    created from that template. Doing that means you don't need to perform this step each time you register new users.
 	
 Note: If you are changing the email addresses for users during migration, leave the old email address in the Person document
-      at this time. The old email address is needed to build the migration artifacts in later steps. You can change the email
-      address in the Person document after all parts of the Transend Migrator migration have been completed.
-===============================================================================================================================
+at this time. The old email address is needed to build the migration artifacts in later steps. You can change the email
+address in the Person document after all parts of the Transend Migrator migration have been completed.
 
-===============================================================================================================================
-Step 2c - Registering Users from Zimbra
+## Step 2c - Registering Users from Zimbra
 
 Only perform this step if legacy user accounts are stored in Zimbra and you want to use MigrationUtils to register
 those users in Domino. Skip this step if user accounts are stored in a different directory or you will register users in Domino
@@ -210,17 +201,19 @@ outside of MigrationUtils.
 3. Run .\getZimbraUsers with the options for your environment and direct the output to a file named registration.ldif. For 
    example:
 
+   ```PowerShell
    .\getZimbraUsers "C:\IBM\Notes" "ldap.ibm.com" "uid=admin,ou=people,dc=ibm,dc=com" "password" 
    "ou=people,dc=ibm,dc=com" "(&(uid=*)(objectClass=inetOrgPerson))" > c:\ProgramData\Transend\Extras\registration.ldif
+   ```
 
    The following are true in the example above:
 
-   - The Notes client is installed in C:\IBM\Notes
-   - The Zimbra server is ldap.ibm.com
-   - The Zimbra administrator is cn=Administrator,cn=Users,dc=ibm,dc=com
-   - The Zimbra administrator password is password
-   - The search for users will begin at ou=people,dc=ibm,dc=com
-   - The search will be for all users in ou=people,dc=ibm,dc=com
+  - The Notes client is installed in C:\IBM\Notes
+  - The Zimbra server is ldap.ibm.com
+  - The Zimbra administrator is uid=admin,ou=people,dc=ibm,dc=com
+  - The Zimbra administrator password is password
+  - The search for users will begin at ou=people,dc=ibm,dc=com
+  - The search will be for all users in ou=people,dc=ibm,dc=com
 
 4. From migration.nsf, run the Register Zimbra Users agent and select the registration.ldif file when prompted.
    Important! Make sure the users you are registering are not already registered in Domino. The agent will fail if a user 
@@ -235,12 +228,10 @@ outside of MigrationUtils.
    template. Doing that means you don't need to perform this step each time you register new users.
 
 Note: If you are changing the email addresses for users during migration, leave the old email address in the Person document
-      at this time. The old email address is needed to build the migration artifacts in later steps. You can change the email
-      address in the Person document after all parts of the Transend Migrator migration have been completed.
-===============================================================================================================================
+at this time. The old email address is needed to build the migration artifacts in later steps. You can change the email
+address in the Person document after all parts of the Transend Migrator migration have been completed.
 
-===============================================================================================================================
-Step 2d - Registering Users from other directory sources
+## Step 2d - Registering Users from other directory sources
 
 Only perform this step if user accounts are not stored in one of the directories MigrationUtils supports or you want to 
 register users in Domino Directory manually. See the Supported platforms section and Steps 2a, 2b, and 2c for details.
@@ -257,12 +248,10 @@ register users in Domino Directory manually. See the Supported platforms section
 5. Verify that the user is successfully registered and click OK.
 
 Note: If you are changing the email addresses for users during migration, leave the old email address in the Person document
-      at this time. The old email address is needed to build the migration artifacts in later steps. You can change the email
-      address in the Person document after all parts of the Transend Migrator migration have been completed.
-===============================================================================================================================
+at this time. The old email address is needed to build the migration artifacts in later steps. You can change the email
+address in the Person document after all parts of the Transend Migrator migration have been completed.
 
-===============================================================================================================================
-Step 3 - Building a batch migration table
+## Step 3 - Building a batch migration table
 
 1. Select the users to be migrated in the batch from the People & Groups tab in Domino Administrator and run the Create 
    Batch Migration Table agent. You can either select users individually or select a group containing users in the batch. A 
@@ -278,10 +267,8 @@ Step 3 - Building a batch migration table
 
   If there are any problems, review MigrationUtils.log, which is located in the directory you specified when running the 
   Update Configuration agent in Step 1.
-===============================================================================================================================
 
-===============================================================================================================================
-Step 4 - Building an address migration table
+## Step 4 - Building an address migration table
 
 1. Select all users that will be migrating from the People & Groups tab in Domino Administrator and run the Create Address
    Translation Table agent. As with the Create Batch Migration Table agent, you can select users individually or a group 
@@ -296,15 +283,13 @@ Step 4 - Building an address migration table
 2. Review the address translation CSV in C:\ProgramData\Transend\Batches. The file should contain the following mappings for
    each user being migrated as part of the migration project:
  
-   - Legacy email address to Notes canonical name
-   - Legacy DN to the Notes canonical name
+  - Legacy email address to Notes canonical name
+  - Legacy DN to the Notes canonical name
 
    If there are any problems, review MigrationUtils.log, which is located in the directory you specified when running the 
    Update Configuration agent in Step 1.
-===============================================================================================================================
 
-===============================================================================================================================
-Step 5 - Building a Transend Migrator configuration
+## Step 5 - Building a Transend Migrator configuration
 
 1. From migration.nsf, run the Create Transend Migrator Configuration agent. A new Transend Migrator TMD file will be 
    generated based on the information you specified when running the Update Configuration agent in Step 1.
@@ -316,10 +301,8 @@ PST Note: MigrationUtils will create a PST configuration in which the name of th
 email address. For example, a user with email address tuser1@ibm.com is expected to have a PST file named tuser1@ibm.com.pst.
 If your PST files do not follow this convention, you can either rename them or modify the configuration file to match your
 environment.
-===============================================================================================================================
 
-===============================================================================================================================
-Step 6 - Performing the migration
+## Step 6 - Performing the migration
 
 1. Launch Transend Migrator and click File -> Open Configuration.
 
@@ -331,8 +314,8 @@ Step 6 - Performing the migration
    C:\ProgramData\Transend\Batches\batch_migration_<datetime>.csv file. Click Open. You should see the users load in the 
    Batch Mode Data tab.
 	
-	IMAP note: If you are migrating from IMAP with the LOGIN authentication mechanism, you will need to manually enter user 
-	passwords in the $Var4 column before proceeding to the next step.
+   IMAP note: If you are migrating from IMAP with the LOGIN authentication mechanism, you will need to manually enter user 
+   passwords in the $Var4 column before proceeding to the next step.
 
 5. Click the Address Translation tab and click the Load From File button. Select the 
    C:\ProgramData\Transend\Batches\address_translation_<datetime>.csv file and click Open. You should see the users load in 
@@ -349,4 +332,3 @@ Step 6 - Performing the migration
 
 10. If there are any errors during the migration, review the Transend Migrator logs, which are located in
     C:\ProgramData\Transend\Logs.
-===============================================================================================================================
