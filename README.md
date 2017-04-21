@@ -62,7 +62,7 @@ Perform the following on the system on which you will be performing the migratio
    level is required.
 
 2. Download and install the latest version of Transend Migrator from <http://www.transend.com/ftp/tm.msi>. Important! You must
-   install Version 12.6 Build 1288 or later.
+   install the latest available version, which the link always points to.
 
 3. Copy the on-prem Domino certifier ID to the migration workstation. For example, copy it to C:\IBM\IDs.
 
@@ -146,7 +146,7 @@ outside of MigrationUtils.
   - The search for users will begin at ou=Sales,dc=ibm,dc=com
   - The search will be for all users in ou=Sales,dc=ibm,dc=com
 
-4. From migration.nsf, run the Register Active Directory Users agent and select the registration.ldif file when prompted.
+4. From migration.nsf, run the Register\Active Directory Users agent and select the registration.ldif file when prompted.
    Important! Make sure the users you are registering are not already registered in Domino. The agent will fail if a user 
    already exists.
 
@@ -172,7 +172,7 @@ outside of MigrationUtils.
    users. Select the Download all users option and uncheck the Create a Google spreadsheet option, which will save the user 
    list as a CSV.
 
-2. From migration.nsf, run the Register Google Users agent and select the CSV file you downloaded from the source mail 
+2. From migration.nsf, run the Register\Google Users agent and select the CSV file you downloaded from the source mail 
    system. Important! Make sure the users you are registering are not already registered in Domino. The agent will fail if a 
    user already exists.
 
@@ -215,7 +215,7 @@ outside of MigrationUtils.
   - The search for users will begin at ou=people,dc=ibm,dc=com
   - The search will be for all users in ou=people,dc=ibm,dc=com
 
-4. From migration.nsf, run the Register Zimbra Users agent and select the registration.ldif file when prompted.
+4. From migration.nsf, run the Register\Zimbra Users agent and select the registration.ldif file when prompted.
    Important! Make sure the users you are registering are not already registered in Domino. The agent will fail if a user 
    already exists.
 
