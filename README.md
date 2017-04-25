@@ -54,7 +54,7 @@ MigrationUtils supports the following systems for data migration:
   - Google Apps
   - IMAP (mail only)
   - Zimbra
-  - Office 365 (experimental)
+  - Office 365
 
 ## Prerequisites
 
