@@ -77,6 +77,8 @@ Perform the following on the system on which you will be performing the migratio
    If this returns a number less than 5, see <https://www.microsoft.com/en-us/download/details.aspx?id=50395> for details on 
    downloading a Windows update to upgrade the version.
 	
+	Note: Review the output of Get-ExecutionPolicy -List to ensure that the assigned policies permit running unsigned scripts.
+	
 5. If you are migrating from Exchange MAPI or PST files, install Outlook on the migration workstation and configure it as the
    default application for email.
 
@@ -316,7 +318,8 @@ address in the Person document after all parts of the Transend Migrator migratio
    generated based on the information you specified when running the Update Configuration agent in Step 1.
 
 2. Review the TMD file in C:\ProgramData\Transend\Configurations. If there are any problems, review the powershell.log file 
-   in C:\ProgramData\Transend\Logs.
+   in C:\ProgramData\Transend\Logs. If you do not see a TMD created and there is no powershell.log, review Step 4 in
+	Prerequisites to make sure unsigned scripts are allowed to run.
 	
 PST Note: MigrationUtils will create a PST configuration in which the name of the PST to be migrated is based on the user's
 email address. For example, a user with email address tuser1@ibm.com is expected to have a PST file named tuser1@ibm.com.pst.
