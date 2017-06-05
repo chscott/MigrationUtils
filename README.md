@@ -322,9 +322,7 @@ address in the Person document after all parts of the Transend Migrator migratio
 	Prerequisites to make sure unsigned scripts are allowed to run.
 	
 PST Note: MigrationUtils will create a PST configuration in which the name of the PST to be migrated is based on the user's
-email address. For example, a user with email address tuser1@ibm.com is expected to have a PST file named tuser1@ibm.com.pst.
-If your PST files do not follow this convention, you can either rename them or modify the configuration file to match your
-environment.
+email address. For example, a user with email address tuser1@ibm.com is expected to have a PST file named tuser1@ibm.com.pst. If your PST files do not follow this convention, you can either rename them or modify the configuration file to match your environment.
 
 ## Step 6 - Performing the migration
 
