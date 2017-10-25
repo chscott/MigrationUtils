@@ -108,7 +108,7 @@ Perform the following on the system on which you will be performing the migratio
 
 9. Open the MigrationUtils script library and click on Declarations.
 
-10. Update the DOMINO_MAIL_SERVER variable to point to your Domino server. For example, "Mail1/IBM."
+10. Update the DOMINO_MAIL_SERVER variable to point to your Domino server. For example, "CN=Mail1/O=IBM."
 
 11. Copy the MigrationUtils script library to names.nsf -> Code -> Script Libraries.
 
