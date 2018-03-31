@@ -80,7 +80,21 @@ Perform the following on the system on which you will be performing the migratio
    Note: Review the output of Get-ExecutionPolicy -List to ensure that the assigned policies permit running unsigned 
    scripts.
 	
-5. If you are migrating from Exchange MAPI or PST files, install Outlook on the migration workstation and configure it as 
+5. Ensure your assigned policies permit running unsigned scripts. To check, run the following command:
+
+   ```PowerShell
+   Get-ExecutionPolicy -List
+   ```
+	
+	See https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-6 for details on policy options. MigrationUtils has been tested with the following configuration:
+	
+   - MachinePolicy: Undefined
+   - UserPolicy: Undefined
+   - Process: Undefined
+   - CurrentUser: Undefined
+   - LocalMachine: **Unrestricted**
+	
+6. If you are migrating from Exchange MAPI or PST files, install Outlook on the migration workstation and configure it as 
    the default application for email.
 
 ## Step 1 - Setup
