@@ -308,12 +308,12 @@ email address in the Person document after all parts of the Transend Migrator mi
   If there are any problems, review MigrationUtils.log, which is located in the directory you specified when running the 
   Update Configuration agent in Step 1.
 
-## Step 4 - Building an address migration table
+## Step 4 - Building an address translation table
 
 1. Select all users that will be migrating from the People & Groups tab in Domino Administrator and run the Create\Address
    Translation Table agent. As with the Create\Batch Migration Table agent, you can select users individually or a group 
    containing the migrating users. You can also select multiple groups; for example, select the Batch 1, Batch 2 and Batch 
-   3 groups to build an address migration table for all users in the three groups.
+   3 groups to build an address translation table for all users in the three groups.
 
    Unlike creating a batch migration table, all users who will migrate (not just those in the current batch) need to be 
    selected here. That's because all migrating users must have their old names mapped to new names when the batch is 
